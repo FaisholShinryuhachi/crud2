@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include('koneksi.php');
 
 if ($_POST['button'] == "update produk") {
@@ -12,10 +12,12 @@ if ($_POST['button'] == "update produk") {
 			";
 
 		if (mysqli_query($conn, $sql)) {
-    		echo "New record created successfully";
+    		$_SESSION['pesan'] = "Update Berhasil";
+			$_SESSION['type'] = "primary";
 		} else {
     		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 		}
+		header("location:index.php");	
 }
 
 elseif ($_POST['button'] == "update merk") {
@@ -25,10 +27,12 @@ elseif ($_POST['button'] == "update merk") {
 			";
 
 		if (mysqli_query($conn, $sql)) {
-    		echo "New record created successfully";
+    			$_SESSION['pesan'] = "Update Berhasil";
+			$_SESSION['type'] = "primary";
 		} else {
     		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 		}
+		header("location:index.php");	
 }
 
 elseif ($_POST['button'] == "update kategori") {
@@ -38,10 +42,12 @@ elseif ($_POST['button'] == "update kategori") {
 			";
 
 		if (mysqli_query($conn, $sql)) {
-    		echo "New record created successfully";
+    			$_SESSION['pesan'] = "Update Berhasil";
+			$_SESSION['type'] = "primary";
 		} else {
     		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 		}
+		header("location:index.php");	
 }
 
 else

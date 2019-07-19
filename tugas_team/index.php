@@ -9,7 +9,9 @@
         </style>
     </head>
     <body>
+        <?php session_start() ?>
         <div class="container">
+
             <h2 class="text-center">Tugas Team</h2>
             <br>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -41,7 +43,7 @@
                 </div>
                 <div class="form-group">
                     <label>Jumlah</label>
-                    <input class="form-control" type="number" name="jumlah" placeholder="Jumlah">
+                    <input class="form-control" type="number" name="jumlah" placeholder="Jumlah" min="0" max="1500000000">
                 </div>
                 
                     <?php
@@ -213,13 +215,31 @@
             </div>
             </form>
             </div>
+            <div class="row">
+            <?php
 
-                
+
+                if(isset($_SESSION['pesan'])){
+                    echo "<div class='row'>
+                       <div class='col-md-12'>
+                           <div class='alert alert-dismissible alert-".$_SESSION['type']."'>
+                             <button type='button' class='close' data-dismiss='alert'>×</button>
+                             <strong>".$_SESSION['pesan']."
+                             </strong>
+                           </div>
+                      </div>
+                   </div>";
+                }                
+                unset($_SESSION['pesan']);
+            ?>
+            </div>
+
+
             
-
-
             <h4 class="text-center">Produk</h4>
+            <div class="row">
             <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
                 <tr>
                     <th>Id Produk</th>
                     <th>Nama Produk</th>
@@ -228,6 +248,7 @@
                     <th>Nama Kategori</th>
                     <th>Pilihan</th>
                 </tr>
+                </thead>
                 <!-- datanya disini -->
                 <?php
                    
@@ -247,8 +268,8 @@
                                         <td>" . $row["nama_merk"]. "</td>
                                         <td>" . $row["nama_kategori"]. "</td>
                                         <td>
-                                            <a href='hapus.php?id_button=1&id_produk=".$row["id_produk"]."'>hapus</a>
-                                            <a href='#update_produk' class='btn btn-default btn-small' data-toggle='modal' data-id=".$row['id_produk'].">Detail</a>
+                                            <a class='btn btn-danger' href='hapus.php?id_button=1&id_produk=".$row["id_produk"]."'>hapus</a>
+                                            <a class='btn btn-primary' href='#update_produk' class='btn btn-default btn-small' data-toggle='modal' data-id=".$row['id_produk'].">Edit</a>
                                         </td>
                                      </tr>";
                         }
@@ -259,14 +280,18 @@
                     mysqli_close($conn);
                     ?>
             </table> 
-
+            </div>
+            <div class="row">
+            <div class="col-md-6">
             <h4 class="text-center">Merk</h4>
             <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
                 <tr>
                     <th>Id Merk</th>
                     <th>Nama Merk</th>
                     <th>Pilihan</th>
                 </tr>
+               </thead>
                 <!-- datanya disini -->
                 <?php
                    
@@ -282,8 +307,8 @@
                                         <td>" . $row["id_merk"]. "</td>
                                         <td>" . $row["nama_merk"]. "</td>
                                         <td>
-                                            <a href='hapus.php?id_button=2&id_merk=".$row["id_merk"]."'>hapus</a>
-                                            <a href='#update_merk' class='btn btn-default btn-small' data-toggle='modal' data-id=".$row['id_merk'].">Detail</a>
+                                            <a class='btn btn-danger' href='hapus.php?id_button=2&id_merk=".$row["id_merk"]."'>hapus</a>
+                                            <a class='btn btn-primary' href='#update_merk' class='btn btn-default btn-small' data-toggle='modal' data-id=".$row['id_merk'].">Edit</a>
                                         </td>
                                      </tr>";
                         }
@@ -294,13 +319,17 @@
                     mysqli_close($conn);
                     ?>
             </table> 
+            </div>
+             <div class="col-md-6">
             <h4 class="text-center">Kategori</h4>
             <table class="table table-bordered table-striped">
                 <tr>
+                    <thead class="thead-dark">
                     <th>Id Kategori</th>
                     <th>Nama Kategori</th>
                     <th>Pilihan</th>
                 </tr>
+                </thead>
                 <!-- datanya disini -->
                 <?php
 
@@ -315,8 +344,8 @@
                                         <td>" . $row["id_kategori"]. "</td>
                                         <td>" . $row["nama_kategori"]. "</td>
                                         <td>
-                                            <a href='hapus.php?id_button=3&id_kategori=".$row["id_kategori"]."'>hapus</a>
-                                            <a href='#update_kategori' class='btn btn-default btn-small' data-toggle='modal' data-id=".$row['id_kategori'].">Detail</a>
+                                            <a class='btn btn-danger' href='hapus.php?id_button=3&id_kategori=".$row["id_kategori"]."'>hapus</a>
+                                            <a class='btn btn-primary' href='#update_kategori' class='btn btn-default btn-small' data-toggle='modal' data-id=".$row['id_kategori'].">Edit</a>
                                         </td>
                                      </tr>";
 
@@ -328,6 +357,8 @@
                     mysqli_close($conn);
                     ?>
             </table>
+        </div>
+            </div>
         </div>
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
     <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
